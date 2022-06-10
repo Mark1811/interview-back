@@ -1,0 +1,18 @@
+@startuml
+ User "1" -- "many" User
+ User   "1" <-- "many" Suscripcion
+class User {
+ - String id
+ - String nombre
+
+}
+
+class Suscripcion{
+ -string partner
+  +getPrice(String partner)
+}
+
+
+
+
+@enduml
