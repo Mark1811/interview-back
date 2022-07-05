@@ -10,4 +10,20 @@ public class SubscriptionApplication {
 		SpringApplication.run(SubscriptionApplication.class, args);
 	}
 
+
+/*
+	@Bean
+	CommandLineRunner run(UserService userService){
+		return args -> {
+             Role rol = new Role("ADMIN");
+			userService.saveRole(rol);
+			User user	=new User("facundo","facundo","pass",null);
+			userService.save(user);
+			userService.addRoleToUser("facundo","ADMIN");
+		};
+	}
+*/
+
+
+
 }
