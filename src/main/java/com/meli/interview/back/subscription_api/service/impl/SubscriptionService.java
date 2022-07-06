@@ -1,14 +1,15 @@
 
-package com.meli.interview.back.subscription_api.service;
+package com.meli.interview.back.subscription_api.service.impl;
 
 import com.meli.interview.back.subscription_api.datos.Subscription;
 import com.meli.interview.back.subscription_api.datos.User;
 import com.meli.interview.back.subscription_api.datos.UserSession;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-
+@Service
 public class SubscriptionService {
     private String jwt;
 
