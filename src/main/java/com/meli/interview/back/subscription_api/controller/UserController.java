@@ -1,10 +1,9 @@
 package com.meli.interview.back.subscription_api.controller;
 
 
-import com.meli.interview.back.subscription_api.repository.UserRepository;
-import com.meli.interview.back.subscription_api.service.SubscriptionService;
+import com.meli.interview.back.subscription_api.datos.UsernameDto;
+import com.meli.interview.back.subscription_api.service.SubscriptionServiceImpl;
 import com.meli.interview.back.subscription_api.service.UserService;
-import com.meli.interview.back.subscription_api.datos.Role;
 import com.meli.interview.back.subscription_api.datos.User;
 import com.meli.interview.back.subscription_api.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class UserController {
 
     @Autowired
     private JWTUtil jwtUtil;
-    private SubscriptionService subscriptionService = new SubscriptionService();
+    private SubscriptionServiceImpl subscriptionServiceImpl = new SubscriptionServiceImpl();
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(HttpServletRequest request) {
@@ -44,10 +43,11 @@ public class UserController {
     }
 
     @GetMapping("/user/friends/suscripciones")
-    public ResponseEntity<?> suscripciones(@RequestBody User user ,HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> suscripciones(@RequestBody UsernameDto user , HttpServletRequest request) throws Exception {
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
-        subscriptionService.setJwt(token);
-        return ResponseEntity.status(200).body(""+subscriptionService.getUserSubscriptionsCost(user));
+        subscriptionServiceImpl.setJwt(token);
+       // return ResponseEntity.status(200).body(""+ subscriptionServiceImpl.getUserSubscriptionsCost(user));
+        return ResponseEntity.status(200).body(""+ userService.getUserSubscriptionsCost(user));
     }
 
 

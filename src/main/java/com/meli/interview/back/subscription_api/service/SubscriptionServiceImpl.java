@@ -1,6 +1,9 @@
 package com.meli.interview.back.subscription_api.service;
 
-import com.meli.interview.back.subscription_api.datos.*;
+import com.meli.interview.back.subscription_api.datos.Subscription;
+import com.meli.interview.back.subscription_api.datos.User;
+import com.meli.interview.back.subscription_api.datos.UserSession;
+import com.meli.interview.back.subscription_api.datos.UsernameDto;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import com.meli.interview.back.subscription_api.repository.SubscriptionRepository;
 import com.meli.interview.back.subscription_api.repository.UserRepository;
@@ -9,42 +12,34 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements  UserService {
+public class SubscriptionServiceImpl implements SubscriptionService{
 
-    @Autowired
-    private UserRepository userRepository;
+    private String jwt;
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
+    }
+
+    public SubscriptionServiceImpl() {
+    }
+
     @Autowired
     private SubscriptionRepository subscriptionRepository;
-
-    @Override
-    public User getUser(Integer id) {
-        return userRepository.getById(id);
-    }
-
-    @Override
-    public User save(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
+    @Autowired
+    private UserRepository userRepository ;
 
 
-
-    @Override
-    public User obtenerUsuarioPorCredenciales(UserRequestDTO usuario) throws Exception {
-     User user = userRepository.findByUsername(usuario.getUsername());
-     if(user != null || (user.getPassword().equals(usuario.getPassword()))){
-         return user;
-     }
-     throw new Exception("las contraseñas no coinciden");
-    }
+    /**
+     * Devuelve el costo total de las suscripciones de un usuario siempre que el usuario que esté logueado,
+     * se encuentre en su lista de amigos
+     *
+     * @param userdto
+     * @return costo total de la suscripciones del user
+     * @throws UserNotLoggedInException si no hay un usuario logueado
+     */
 
     @Override
     public Float getUserSubscriptionsCost(UsernameDto userdto) throws Exception {
@@ -86,5 +81,4 @@ public class UserServiceImpl implements  UserService {
         }
     }
 
-
-}
+}//End of class
