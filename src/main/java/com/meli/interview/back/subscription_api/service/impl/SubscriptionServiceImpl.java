@@ -3,7 +3,7 @@ package com.meli.interview.back.subscription_api.service.impl;
 import com.meli.interview.back.subscription_api.datos.Subscription;
 import com.meli.interview.back.subscription_api.datos.User;
 import com.meli.interview.back.subscription_api.datos.UserSession;
-import com.meli.interview.back.subscription_api.datos.UsernameDto;
+import com.meli.interview.back.subscription_api.datos.DTO.UsernameDto;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import com.meli.interview.back.subscription_api.repository.SubscriptionRepository;
 import com.meli.interview.back.subscription_api.repository.UserRepository;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {

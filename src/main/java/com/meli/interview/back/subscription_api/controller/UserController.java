@@ -1,10 +1,10 @@
 package com.meli.interview.back.subscription_api.controller;
 
+import com.meli.interview.back.subscription_api.datos.DTO.UserRequestDTO;
 import com.meli.interview.back.subscription_api.datos.User;
-import com.meli.interview.back.subscription_api.datos.UsernameDto;
+import com.meli.interview.back.subscription_api.datos.DTO.UsernameDto;
 import com.meli.interview.back.subscription_api.service.SubscriptionService;
 import com.meli.interview.back.subscription_api.service.UserService;
-
 import com.meli.interview.back.subscription_api.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,11 +39,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
-    @PostMapping("/user/friends")
-    public ResponseEntity<User> addFriend(@RequestBody User user, HttpServletRequest request) {
+    @PostMapping("/user/add_friend")
+    public ResponseEntity<User> addFriend(@RequestBody UserRequestDTO newFriend, HttpServletRequest request) {
         String token = jwtUtil.obtainToken(request);
         jwtUtil.validateJWT(token);
-        return ResponseEntity.ok().body(userService.save(user));
+
+        return ResponseEntity.ok().body(userService.addFriend(newFriend.getUsername()));
     }
 
     @GetMapping("/user/friends/suscripciones")

@@ -20,6 +20,9 @@ public class UserSession {
 
     private String jwt;
 
+    private UserSession() {
+    }
+
     public UserSession setJwt(String jwt) {
         return this;
     }
@@ -28,24 +31,15 @@ public class UserSession {
         return this.jwt;
     }
 
-    private UserSession() {
-    }
-
     public static UserSession getInstance() {
         return userSession;
     }
 
     public User getLoggedUser() throws UserNotLoggedInException {
-        //String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
-        //
         String username = jwtUtil.getValue(this.jwt);
-        String password = "q8qeYx4Pf"; //TODO borrar esto.
 
         if (!username.isEmpty()) {
-            UserRequestDTO user = new UserRequestDTO();
-            user.setUsername(username);
-           user.setPassword(password);
-            return userService.obtenerUsuarioPorCredenciales(user);
+            return userService.getUserByUsername(username);
         }
         throw new UserNotLoggedInException("No hay ningún usuario logueado actualmente");
     }
