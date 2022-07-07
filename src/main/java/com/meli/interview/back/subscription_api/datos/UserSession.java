@@ -9,18 +9,20 @@ import com.meli.interview.back.subscription_api.util.JWTUtil;
 
 public class UserSession {
 
-
-    private UserService userService;
     private static final UserSession userSession = new UserSession();
-
-    public void setUserService(UserServiceImpl userService) {
-        this.userService = userService;
-    }
-
 
     private JWTUtil jwtUtil = new JWTUtil();
 
     private String jwt;
+
+    private UserService userService;
+
+    private UserSession() {
+    }
+
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     public UserSession setJwt(String jwt) {
         return this;
@@ -28,9 +30,6 @@ public class UserSession {
 
     public String getJwt() {
         return this.jwt;
-    }
-
-    private UserSession() {
     }
 
     public static UserSession getInstance() {
@@ -42,9 +41,7 @@ public class UserSession {
         //
         String username = jwtUtil.getValue(this.jwt);
         if (!username.isEmpty()) {
-            UserRequestDTO user = new UserRequestDTO();
-            user.setUsername(username);
-            return userService.obtenerUsuarioPorCredenciales(user);
+            return userService.getUserByUsername(username);
         }
         throw new UserNotLoggedInException("No hay ningún usuario logeado actualmente");
     }
