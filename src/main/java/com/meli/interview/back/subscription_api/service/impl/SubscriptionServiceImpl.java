@@ -4,6 +4,7 @@ import com.meli.interview.back.subscription_api.datos.Subscription;
 import com.meli.interview.back.subscription_api.datos.User;
 import com.meli.interview.back.subscription_api.datos.UserSession;
 import com.meli.interview.back.subscription_api.datos.DTO.UsernameDto;
+import com.meli.interview.back.subscription_api.exception.FriendNotFoundException;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import com.meli.interview.back.subscription_api.repository.SubscriptionRepository;
 import com.meli.interview.back.subscription_api.repository.UserRepository;
@@ -62,8 +63,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                             .mapToDouble(Subscription::getPrice)
                             .sum();
                 }
-                return 0f;
-                //todo agregar logica en caso que no sea amigo.
+                throw new FriendNotFoundException("El usuario indicado no figura en la lista de amigos.");
             } else {
                 throw new UserNotLoggedInException("");
             }
