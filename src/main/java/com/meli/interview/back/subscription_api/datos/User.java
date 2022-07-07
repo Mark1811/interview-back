@@ -104,7 +104,11 @@ public class User   {
         this.id = id;
     }
 
+<<<<<<< Updated upstream
     public Integer getId() {
+=======
+    public Integer getId(){
+>>>>>>> Stashed changes
         return id;
     }
 }
