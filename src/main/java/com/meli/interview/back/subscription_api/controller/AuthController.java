@@ -18,6 +18,6 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody UserRequestDTO usuario) throws Exception {
         UserSession.getInstance().obtenerToken(userService, usuario);
-        return ResponseEntity.ok().header("Authorization", UserSession.getInstance().getJwt()).body("Logeado exitosamente");
+        return ResponseEntity.ok().header("Authorization", UserSession.getInstance().getJwt()).body("Logueado exitosamente");
     }
 }

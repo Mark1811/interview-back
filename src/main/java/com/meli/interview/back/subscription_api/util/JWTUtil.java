@@ -124,6 +124,8 @@ public class JWTUtil {
     }
 
     public void validateJWT(String jwt) {
+        String auth = UserSession.getInstance().getJwt();
+
         if (!jwt.equals(UserSession.getInstance().getJwt())) {
             throw new UserNotLoggedInException("Tu token de acceso es incorrecto");
         }

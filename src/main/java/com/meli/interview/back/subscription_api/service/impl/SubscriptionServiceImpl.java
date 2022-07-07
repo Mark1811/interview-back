@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -53,27 +54,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
             if (loggedUser != null) {
                 boolean isFriend = friend.getFriends().contains(loggedUser);
+                //realizar con stream parallel.
 
                 if (isFriend) {
-                    subscriptionList = subscriptionRepository.findByUser(friend);
+                    subscriptionList = new ArrayList<Subscription>(friend.getSubscriptions());
+
+                    return (float) subscriptionList.stream()
+                            .mapToDouble(Subscription::getPrice)
+                            .sum();
                 }
-                return (float) subscriptionList.stream()
-                        .mapToDouble(Subscription::getPrice)
-                        .sum();
-
-           /* for (User friend : user.getFriends()) {// de ese usuario se obtiene una lista de Usuario
-                if (friend.equals(loggedUser)) {// se itera la lista y se busca que el usuario este logueado
-                    isFriend = true;
-                    break;
-                }
-            }*/
-
-           /* float totalPrice = 0;
-
-            for (Subscription subscription : subscriptionList) {
-                totalPrice += subscription.getPrice();
-            }
-            return totalPrice;*/
+                return 0f;
+                //todo agregar logica en caso que no sea amigo.
             } else {
                 throw new UserNotLoggedInException("");
             }

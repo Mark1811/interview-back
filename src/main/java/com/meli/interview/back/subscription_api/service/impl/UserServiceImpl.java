@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User obtenerUsuarioPorCredenciales(UserRequestDTO usuario) throws UserNotLoggedInException {
         User user = userRepository.findByUsername(usuario.getUsername());
+
         if (user != null && (user.getPassword().equals(usuario.getPassword()))) {
             return user;
         } else {
