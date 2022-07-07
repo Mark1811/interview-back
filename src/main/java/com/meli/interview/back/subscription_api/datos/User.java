@@ -53,7 +53,6 @@ public class User {
         return friends;
     }
 
-
     public List<Subscription> getSubscriptions() {
         return subscriptions;
     }
@@ -61,7 +60,6 @@ public class User {
     public void setSubscriptions(List<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
     }
-
 
     public String getName() {
         return name;
@@ -87,12 +85,9 @@ public class User {
         this.password = password;
     }
 
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void addFriend(User newFriend) {
+        this.friends.add(newFriend);
     }
-
-
 
     /*
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
