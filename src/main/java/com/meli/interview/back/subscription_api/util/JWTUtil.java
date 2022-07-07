@@ -35,8 +35,7 @@ public class JWTUtil {
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis =604800000;
 
-    private final Logger log = LoggerFactory
-            .getLogger(JWTUtil.class);
+    private final Logger log = LoggerFactory.getLogger(JWTUtil.class);
 
     /**
      * Create a new token.
@@ -80,8 +79,16 @@ public class JWTUtil {
     public String getValue(String jwt) {
         // This line will throw an exception if it is not a signed JWS (as
         // expected)
-        Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
-                .parseClaimsJws(jwt).getBody();
+
+        //        return Jwts.parser()
+        //                .setSigningKey(SECRET_KEY)
+        //                .parseClaimsJws(token)
+        //                .getBody()
+        //                .getSubject();
+        Claims claims = Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(jwt) //jwt es el token
+                .getBody();
 
         return claims.getSubject();
     }

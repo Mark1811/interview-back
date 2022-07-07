@@ -33,7 +33,7 @@ public class UserSession {
     }
 
     public User getLoggedUser() throws Exception {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJrbGF0aGFtN0B0d2l0dGVyLmNvbSIsImlhdCI6MTY1NzIwMTUyMCwic3ViIjoia2xhdGhhbTdAdHdpdHRlci5jb20iLCJpc3MiOiJNYWluIiwiZXhwIjoxNjU3ODA2MzIwfQ.tElF55TSlELAfdS7eGwu4LjSp5IIX0f-3vglvSwfwRY";//request.getHeader("authorization");
         String username = jwtUtil.getValue(token);
          if(!username.isEmpty()){
              UserRequestDTO user = new UserRequestDTO();

@@ -15,6 +15,4 @@ public interface UserService   {
     List<User> findAll();
 
     User obtenerUsuarioPorCredenciales(UserRequestDTO usuario) throws Exception;
-
-    public Float getUserSubscriptionsCost(UsernameDto userdto) throws Exception;
 }

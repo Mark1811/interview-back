@@ -1,10 +1,9 @@
 package com.meli.interview.back.subscription_api.controller;
 
-
-import com.meli.interview.back.subscription_api.datos.UsernameDto;
-import com.meli.interview.back.subscription_api.service.SubscriptionServiceImpl;
-import com.meli.interview.back.subscription_api.service.UserService;
 import com.meli.interview.back.subscription_api.datos.User;
+import com.meli.interview.back.subscription_api.datos.UsernameDto;
+import com.meli.interview.back.subscription_api.service.SubscriptionService;
+import com.meli.interview.back.subscription_api.service.UserService;
 import com.meli.interview.back.subscription_api.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,9 @@ public class UserController {
 
     @Autowired
     private JWTUtil jwtUtil;
-    private SubscriptionServiceImpl subscriptionServiceImpl = new SubscriptionServiceImpl();
+
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(HttpServletRequest request) {
@@ -44,17 +45,9 @@ public class UserController {
 
     @GetMapping("/user/friends/suscripciones")
     public ResponseEntity<?> suscripciones(@RequestBody UsernameDto user , HttpServletRequest request) throws Exception {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
-        subscriptionServiceImpl.setJwt(token);
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJrbGF0aGFtN0B0d2l0dGVyLmNvbSIsImlhdCI6MTY1NzIwMTUyMCwic3ViIjoia2xhdGhhbTdAdHdpdHRlci5jb20iLCJpc3MiOiJNYWluIiwiZXhwIjoxNjU3ODA2MzIwfQ.tElF55TSlELAfdS7eGwu4LjSp5IIX0f-3vglvSwfwRY";//request.getHeader("authorization");
+        subscriptionService.setJwt(token);
        // return ResponseEntity.status(200).body(""+ subscriptionServiceImpl.getUserSubscriptionsCost(user));
-        return ResponseEntity.status(200).body(""+ userService.getUserSubscriptionsCost(user));
+        return ResponseEntity.status(200).body(""+ subscriptionService.getUserSubscriptionsCost(user));
     }
-
-
-
-
-
-
-
-
 }
