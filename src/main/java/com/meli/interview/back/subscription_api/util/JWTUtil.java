@@ -1,6 +1,8 @@
 package com.meli.interview.back.subscription_api.util;
 
 
+import com.meli.interview.back.subscription_api.datos.UserSession;
+import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
@@ -21,8 +24,8 @@ import java.util.Date;
 
 
 /**
- *  component nos sirve para  usarlo en el proyecto
- *  nos habilita   la etiqueta value para que lea del archivo aplication.properties
+ * component nos sirve para  usarlo en el proyecto
+ * nos habilita   la etiqueta value para que lea del archivo aplication.properties
  */
 @Component
 public class JWTUtil {
@@ -33,7 +36,7 @@ public class JWTUtil {
     private String issuer = "Main";
 
     @Value("${security.jwt.ttlMillis}")
-    private long ttlMillis =604800000;
+    private long ttlMillis = 604800000;
 
     private final Logger log = LoggerFactory.getLogger(JWTUtil.class);
 
@@ -106,5 +109,23 @@ public class JWTUtil {
                 .parseClaimsJws(jwt).getBody();
 
         return claims.getId();
+    }
+
+    public String obtainToken(HttpServletRequest request) {
+
+        String auth = request.getHeader("Authorization");
+
+        if (auth != null && auth.contains("Bearer ")) {
+            return request.getHeader("Authorization").split(" ")[1];
+        } else {
+            throw new UserNotLoggedInException("No tienes un token de acceso, logeate con una cuenta valida para obtenerlo");
+        }
+
+    }
+
+    public void validateJWT(String jwt) {
+        if (!jwt.equals(UserSession.getInstance().getJwt())) {
+            throw new UserNotLoggedInException("Tu token de acceso es incorrecto");
+        }
     }
 }

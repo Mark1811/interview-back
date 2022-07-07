@@ -1,4 +1,4 @@
-package com.meli.interview.back.subscription_api.service;
+package com.meli.interview.back.subscription_api.service.impl;
 
 import com.meli.interview.back.subscription_api.datos.Subscription;
 import com.meli.interview.back.subscription_api.datos.User;
@@ -7,6 +7,7 @@ import com.meli.interview.back.subscription_api.datos.UsernameDto;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import com.meli.interview.back.subscription_api.repository.SubscriptionRepository;
 import com.meli.interview.back.subscription_api.repository.UserRepository;
+import com.meli.interview.back.subscription_api.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
-public class SubscriptionServiceImpl implements SubscriptionService{
+public class SubscriptionServiceImpl implements SubscriptionService {
 
     private String jwt;
 
