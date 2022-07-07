@@ -1,7 +1,6 @@
 package com.meli.interview.back.subscription_api.datos;
 
 import com.meli.interview.back.subscription_api.datos.DTO.UserRequestDTO;
-import com.meli.interview.back.subscription_api.exception.CollaboratorCallException;
 import com.meli.interview.back.subscription_api.exception.UserNotLoggedInException;
 import com.meli.interview.back.subscription_api.service.UserService;
 import com.meli.interview.back.subscription_api.service.impl.UserServiceImpl;
@@ -38,16 +37,16 @@ public class UserSession {
         return userSession;
     }
 
-    public User getLoggedUser() throws Exception {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
-        String username = jwtUtil.getValue(token);
+    public User getLoggedUser() throws UserNotLoggedInException {
+        //String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
+        //
+        String username = jwtUtil.getValue(this.jwt);
         if (!username.isEmpty()) {
             UserRequestDTO user = new UserRequestDTO();
             user.setUsername(username);
             return userService.obtenerUsuarioPorCredenciales(user);
         }
-        throw new CollaboratorCallException(
-                "UserSession.getLoggedUser() should not be called in an unit test");
+        throw new UserNotLoggedInException("No hay ningún usuario logeado actualmente");
     }
 
     public String obtenerToken(UserServiceImpl userService, UserRequestDTO user) throws Exception {
