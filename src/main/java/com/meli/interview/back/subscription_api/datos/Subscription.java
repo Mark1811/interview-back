@@ -1,7 +1,5 @@
 package com.meli.interview.back.subscription_api.datos;
 
-import com.meli.interview.back.subscription_api.datos.User;
-
 import javax.persistence.*;
 
 
@@ -37,5 +35,5 @@ public class Subscription {
         }
 
         return price;
-     }
+    }
 }
