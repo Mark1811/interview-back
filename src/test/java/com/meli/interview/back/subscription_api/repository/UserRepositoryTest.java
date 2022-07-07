@@ -1,12 +1,12 @@
 package com.meli.interview.back.subscription_api.repository;
 
-import com.meli.interview.back.subscription_api.datos.User;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.meli.interview.back.subscription_api.datos.User;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +20,6 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
 
-    // findUserExistForUsername
     @Test
     void findUserExistForUsername() {
         User user = userRepository.findByUsername("mscurrell0@unicef.org");

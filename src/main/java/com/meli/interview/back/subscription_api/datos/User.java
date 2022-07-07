@@ -89,6 +89,10 @@ public class User   {
         this.username = username;
     }
 
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
     public String getPassword() {
         return password;
     }

@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/user/friends")
-    public ResponseEntity<User> addFriend(@RequestBody User user , HttpServletRequest request){
-        String token = request.getHeader("authorization");
+    public ResponseEntity<User> addFriend(@RequestBody User user ){
+    //    String token = request.getHeader("authorization");
         return ResponseEntity.ok().body(userService.save(user));
     }
 
