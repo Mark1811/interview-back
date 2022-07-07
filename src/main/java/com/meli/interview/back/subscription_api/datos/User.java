@@ -73,8 +73,6 @@ public class User   {
     }
 
 
-
-
     public String getName() {
         return name;
     }
@@ -104,7 +102,7 @@ public class User   {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Integer getId(){
         return id;
     }
 }
