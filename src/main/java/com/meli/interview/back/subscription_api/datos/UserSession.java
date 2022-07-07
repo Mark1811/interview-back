@@ -37,8 +37,6 @@ public class UserSession {
     }
 
     public User getLoggedUser() throws UserNotLoggedInException {
-        //String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmY29yZG9iYSIsImlhdCI6MTY1Njk1OTk1MCwic3ViIjoiIiwiaXNzIjoiTWFpbiIsImV4cCI6MTY1NzU2NDc1MH0.bEeuRlpfiOd3sG4Hvz1E6CSrQJS4NkoVlLH0LQ-RRHQ";//request.getHeader("authorization");
-        //
         String username = jwtUtil.getValue(this.jwt);
         if (!username.isEmpty()) {
             return userService.getUserByUsername(username);

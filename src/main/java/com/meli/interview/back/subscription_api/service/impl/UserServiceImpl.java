@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         User userToCheck = userRepository.findByUsername(usernameToCheck);
 
         if (userToCheck != null) {
-            return userRepository.findByUsername(usernameToCheck);
+            return userRepository.findByUsername(usernameToCheck); //userToCheck
         } else {
             throw new UserNotFoundException("El usuario no existe");
         }
