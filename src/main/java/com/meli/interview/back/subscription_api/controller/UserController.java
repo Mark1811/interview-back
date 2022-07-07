@@ -27,8 +27,8 @@ public class UserController {
     private SubscriptionService subscriptionService = new SubscriptionService();
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers(HttpServletRequest request) {
-        String token = request.getHeader("authorization").split(" ")[1];
+    public ResponseEntity<List<User>> getUsers() {
+      //  String token = request.getHeader("authorization").split(" ")[1];
         return ResponseEntity.ok().body(userService.findAll());
     }
 
