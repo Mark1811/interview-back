@@ -60,5 +60,4 @@ class UserRepositoryTest {
         assertTrue(userSave.getId()>0);
         assertEquals("PruebaNombre", userSave.getName());
     }
-
 }
